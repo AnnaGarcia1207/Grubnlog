@@ -16,7 +16,6 @@ from datetime import timedelta
 def landing_page(request):
     food = Food.objects.all()
     return render(request, 'food_trackers/landing_page.html', {'food': food})
-    # return HttpResponse("Hello this is your landing page :)")
 
 
 def food_details(request, slug):

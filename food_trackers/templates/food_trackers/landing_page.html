@@ -3,11 +3,25 @@
 {% block content %}
 
     <h1>Inventory</h1>
-    <div class="foods">
+    <table style="width:100%">
+        <tr>
+            <th>Food Brand</th>
+            <th>Food Name</th>
+            <th>Diet Suited for</th>
+        </tr>
         {% for item in food %}
-        <div class="food">
-            <h2>{{item.title}}</h2>
-        </div>
+        <tr>
+            <td>{{ item.brand }}</td>
+            <td>{{ item.title }}</td>
+            <td>{{ item.diet }}</td>
+        </tr>
         {% endfor %}
-    </div>
+    </table>
+<!--    <div class="foods">-->
+<!--        {% for item in food %}-->
+<!--        <div class="food">-->
+<!--            <h2>{{item.title}}</h2>-->
+<!--        </div>-->
+<!--        {% endfor %}-->
+<!--    </div>-->
 {% endblock %}
