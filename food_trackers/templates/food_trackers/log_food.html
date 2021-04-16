@@ -1,0 +1,19 @@
+{% extends 'base_layout.html' %}
+
+{% block content %}
+    <title>Log Food</title>
+    <div class="create_log">
+        <br>
+        <h2>Log food for today</h2>
+        <br>
+        <table>
+        <form class="site-form" action="{% url 'food_trackers:log_food' %}" method="post">
+            {% csrf_token %}
+            {{ form.as_table }}
+
+            </table>
+            <input type="submit" value="Log today">
+        </form>
+    </div>
+{% endblock %}
+

@@ -1,0 +1,35 @@
+{% extends 'base_layout.html' %}
+
+{% block content %}
+    <title>Home Page</title>
+
+      <h2 class="text-left headline">TODAY</h2>
+    <div class="row mt-6">
+        <table class="tables text-center">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope ="col">Food Name</th>
+                    <th scope ="col">Calories</th>
+                    <th scope ="col">Quantity</th>
+                    <th scope ="col">Type of diet</th>
+                    <th scope ="col">Update</th>
+                    <th scope ="col">Delete</th>
+                </tr>
+            </thead>
+                {% for food in food_selected_today %}
+                <tr>
+                    <td>{{ food.food }}</td>
+                    <td>{{ food.calorie_amount }}</td>
+                    <td>{{ food.amount }}</td>
+                    <td>{{ food.created_on }}</td>
+                    <td><a class="btn btn-sm btn-info" href="{% url 'food_trackers:update_food' food.id %}">Update</a></td>
+                    <td><a class="btn btn-sm " href="{% url 'food_trackers:delete_food' food.id %}">Delete</a></td>
+                </tr>
+                {% endfor %}
+            <tbody>
+
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends 'base_layout.html' %}
+
+{% block content %}
+    <div class="food-detail">
+        <div class="food">
+            <br>
+            <h2>{{food.title}}</h2>
+            <p>type of diet : {{food.diet}}</p>
+            <p>Calories     : {{food.calories}}</p>
+            <p>Proteins     : {{food.proteins}}g</p>
+            <p>Fats         : {{food.fats}}g</p>
+            <p>Carbohydrates: {{food.carbs}}g</p>
+            <p>Cholesterol  : {{food.cholesterol}}mg</p>
+            <p>Sodium       : {{food.sodium}}mg</p>
+            <p>Potassium    : {{food.potassium}}mg</p>
+            <p>Sugar        : {{food.sugar}}g</p>
+            <p>Ingredients  : {{food.ingredients}}</p>
+            <p>Allergens    : {{food.allergens}}</p>
+        </div>
+    </div>
+
+{% endblock %}
+

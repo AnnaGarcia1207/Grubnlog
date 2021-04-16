@@ -1,0 +1,16 @@
+{% extends 'base_layout.html' %}
+
+{% block content %}
+    <title>create food</title>
+    <div class="create_log">
+        <h2>Create</h2>
+        <br>
+
+        <form class="site-form" action="{% url 'food_trackers:create' %}" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Log today">
+        </form>
+    </div>
+    <script src="/static/slugify.js"/></script>
+{% endblock %}
