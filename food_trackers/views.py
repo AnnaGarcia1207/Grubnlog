@@ -100,7 +100,7 @@ def create(request):  # uses addfoodform
             profile = form.save(commit=False)
             profile.profile_of = request.user
             profile.save()
-            return redirect('food_trackers:profile')
+            return redirect('food_trackers:log_food')
     else:
         form = AddFoodForm()
     # To filter Food
@@ -112,22 +112,19 @@ def create(request):  # uses addfoodform
 
 @login_required(login_url='food_trackers:login')
 def update_food(request, pk):
-    food_items = Food.objects.filter(profile_of=request.user)
     food_item = Food.objects.get(id=pk)
-    form = LogFoodForm(request.user, request.POST,instance=food_item)
+    form = AddFoodForm(instance=food_item)
     if request.method == 'POST':
-        form = LogFoodForm(request.POST, instance=food_item)
+        form = AddFoodForm(request.POST, instance=food_item)
         if form.is_valid():
             form.save()
-            return redirect('food_trackers:profile')
-    my_filter = FoodFilter(request.GET, queryset=food_items)
-    context = {'form': form, 'food_items': food_items, 'my_filter': my_filter}
-    return render(request, 'food_trackers/log_food.html', context)
+            return redirect('food_trackers:log_food')
+    return render(request, 'food_trackers/create_food.html', {'form': form})
 
 
 @login_required(login_url='food_trackers:login')
 def delete_food(request, pk):
-    food_item = Food.objects.filter(pk=pk).first()
+    food_item = Food.objects.filter(id=pk).first()
     if request.method == 'POST':
         food_item.delete()
         return redirect('food_trackers:profile')
@@ -139,25 +136,23 @@ def profile(request):
     person = Profile.objects.filter(profile_of=request.user).last()
     food_items = Food.objects.filter(profile_of=request.user)
     form = ProfileForm(instance=person)
-    if request.method =='POST':
-        form = ProfileForm(request.POST,instance=person)
+    if request.method == 'POST':
+        form = ProfileForm(request.POST, instance=person)
         if form.is_valid():
             form.save()
             return redirect('food_trackers:profile')
     else:
         form = ProfileForm(instance=person)
-    past_entries = timezone.now().date() - timedelta(days=1)
+    past_entries = timezone.now().date() - timedelta(days=7)
     records = Profile.objects.filter(date__gte=past_entries, date__lt=timezone.now().date(),
                                      profile_of=request.user)
 
-    context = {'form':form, 'food_items': food_items, 'records': records}
+    context = {'form': form, 'food_items': food_items, 'records': records}
     return render(request, 'food_trackers/profile.html', context)
 
 
 @login_required(login_url='food_trackers:login')  # This protects this view
 def home(request):
-    # food = Food.objects.filter(profile_of=request.user)
-    # return render(request, 'food_trackers/home.html', {'food': food})
     calories = Profile.objects.filter(profile_of=request.user).last()
     calorie_goal = calories.calorie_goal
 
@@ -180,6 +175,31 @@ def home(request):
         'calorie_goal_status': calorie_goal_status,
         'over_calorie': over_calorie,
         'food_selected_today': all_logs_today
+
     }
 
     return render(request, 'food_trackers/home.html', context)
+
+
+def display_chart(request):
+    person = Profile.objects.filter(profile_of=request.user).last()
+    foods_selected = person.food_selected
+
+
+def demo_piechart(request):
+    """
+    pieChart page
+    """
+    xdata = ["Apple", "Apricot", "Avocado", "Banana", "Boysenberries", "Blueberries", "Dates", "Grapefruit", "Kiwi",
+             "Lemon"]
+    ydata = [52, 48, 160, 94, 75, 71, 490, 82, 46, 17]
+
+    extra_serie = {"tooltip": {"y_start": "", "y_end": " cal"}}
+    chartdata = {'x': xdata, 'y1': ydata, 'extra1': extra_serie}
+    charttype = "pieChart"
+
+    data = {
+        'charttype': charttype,
+        'chartdata': chartdata,
+    }
+    return render(request, 'piechart.html', data)

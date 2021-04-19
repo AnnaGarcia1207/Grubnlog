@@ -20,5 +20,4 @@ urlpatterns = [
     path('<slug:slug>/', views.food_details, name='food_details'),
     # history
 
-
 ]

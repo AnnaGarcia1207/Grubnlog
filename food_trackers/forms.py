@@ -23,12 +23,12 @@ class LogFoodForm(forms.ModelForm):
         self.fields['food_selected'].queryset = Food.objects.filter(profile_of=user)
 
 
-class AddFoodForm(forms.ModelForm):
+class AddFoodForm(ModelForm):
     class Meta:
         model = Food
-        fields = ('title', 'slug', 'brand', 'quantity', 'calories', 'proteins', 'fats', 'carbs',
+        fields = ['title', 'slug', 'brand', 'quantity', 'calories', 'proteins', 'fats', 'carbs',
                   'cholesterol', 'sodium', 'potassium', 'sugar', 'ingredients', 'allergens',
-                  'diet')
+                  'diet']
         # widgets = {
         #     'title': forms.TextInput(attrs={'class': 'input'}),
         #     'brand': forms.TextInput(attrs={'class': 'input'}),

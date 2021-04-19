@@ -1,16 +1,78 @@
 {% extends 'base_layout.html' %}
 
 {% block content %}
+    <style>
+        .create_food{ background:linear-gradient(to top, #000428, #004e92);
+        height:100%;}
+
+        .create_food_box{ background:linear-gradient(to top, #000428, #004e92);
+         height:auto;
+         width:80%;
+         margin:auto;
+         padding: 20px;
+         }
+
+        h2{
+        padding: 10px;
+        text-align: center;
+        color: white;
+        font-weight:600;
+        font-size: 40px;
+        font-family:'Courier New', Courier, monospace;
+        }
+
+        .site_create_form{
+         background:linear-gradient(to bottom, #005aa7, #fffde4);
+         height:auto;
+         width:70%;
+         border: 2px solid white;
+         margin:auto;
+         padding: 20px;
+        }
+
+        select{width: 100%;}
+
+        input[type="submit"] { margin-top: 30px; border-radius: 30px;
+        background-color: blue;
+        color:white;
+        font-size: 15px;
+        font-family:'Courier New', Courier, monospace;}
+
+        p3{
+        font-family:'Courier New', Courier, monospace;
+        color:white;
+        font-weight:bold;
+        }
+
+    </style>
     <title>create food</title>
-    <div class="create_log">
-        <h2>Create</h2>
+    <div class="create_food">
+        <div class="create_food_box">
+        <br>
+        <h2>Create Food</h2>
         <br>
 
-        <form class="site-form" action="{% url 'food_trackers:create' %}" method="post">
+        <form class="site_create_form" action="" method="POST">
             {% csrf_token %}
-            {{ form.as_p }}
-            <input type="submit" value="Log today">
+            <p3>Food title:{{ form.title }}</p3> <br><br>
+            <p3>Food brand: {{ form.brand }}</p3> <br><br>
+            <p3>Type of Diet: {{ form.diet }}</p3>
+            <p3>Quantity: {{ form.quantity }}</p3> <br><br>
+            <p3>Calories: {{ form.calories }}</p3> <br><br>
+            <p3>Total Fats: {{ form.fats }} G</p3> <br><br>
+            <p3>Cholesterol: {{ form.cholesterol }} MG</p3> <br><br>
+            <p3>Sodium: {{ form.sodium }} MG</p3> <br><br>
+            <p3>Total Carbohydrates: {{ form.carbs }} G</p3> <br><br>
+            <p3>Protein: {{ form.proteins }} G</p3> <br><br>
+            <p3>Total Sugar: {{ form.sugar }}G</p3> <br><br>
+            <p3>Total Potassium: {{ form.potassium }} MG</p3> <br><br>
+            <p3>Food Ingredients: {{form.ingredients}}</p3> <br><br>
+            <p3>Food Allergens: {{form.allergens}}</p3> <br><br>
+            <p3>slug entry: {{form.slug}}</p3> <br><br>
+
+            <input type="submit" value="Create Food">
         </form>
+         </div>
     </div>
     <script src="/static/slugify.js"/></script>
 {% endblock %}

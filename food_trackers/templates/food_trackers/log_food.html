@@ -1,19 +1,54 @@
 {% extends 'base_layout.html' %}
 
 {% block content %}
+<!--    <head>-->
+<!--    <link rel="stylesheet" href="../../static/styles.css" />-->
+<!--    </head>-->
+    <style>
+    .create_log{ background:linear-gradient(to top, #000428, #004e92);
+     height:100vh;}
+
+    .create_log_box{ background:linear-gradient(to bottom, #005aa7, #fffde4);
+     height:auto;
+     width:80%;
+     border: 1px solid white;
+     margin:auto;
+     padding: 20px;
+     }
+
+     input[type="submit"] { margin-top: 20px; border-radius: 20px;
+      background-color: blue;
+      color:white;
+      font-size: 15px;
+      font-family:'Courier New', Courier, monospace;}
+
+     select{width: 100%;}
+
+    .log_food_title{
+        color:white;
+        text-align:center;
+        font-family:'Courier New', Courier, monospace;
+        font-weight:600;
+    }
+
+    </style>
+
     <title>Log Food</title>
     <div class="create_log">
         <br>
-        <h2>Log food for today</h2>
+        <div class="create_log_box">
+        <h2 class="log_food_title" >Log food for today</h2>
         <br>
         <table>
-        <form class="site-form" action="{% url 'food_trackers:log_food' %}" method="post">
+        <form class="site_log_form" action="{% url 'food_trackers:log_food' %}" method="post">
             {% csrf_token %}
             {{ form.as_table }}
 
             </table>
             <input type="submit" value="Log today">
         </form>
+        </div>
     </div>
+
 {% endblock %}
 

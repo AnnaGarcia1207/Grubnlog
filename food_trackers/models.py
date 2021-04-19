@@ -27,6 +27,7 @@ class Food(models.Model):
     sugar = models.FloatField(blank=True, default=0)
     ingredients = models.TextField(blank=True)
     allergens = models.TextField(blank=True)
+    created_on = models.DateField(auto_now_add=True)
     # required
     diet = MultiSelectField(max_length=100, choices=DIET_CHOICES, max_choices=4, default='None Specific')
     slug = models.SlugField()
@@ -51,7 +52,7 @@ class Profile(models.Model):
 
     def save(self, *args, **kwargs):
         if self.food_selected is not None:
-            self.amount = (self.food_selected.calories / self.food_selected.quantity)
+            self.amount = (self.food_selected.calories * self.food_selected.quantity)
             self.calorie_count = self.amount * self.quantity
             self.total_calorie = self.calorie_count + self.total_calorie
             calories = Profile.objects.filter(profile_of=self.profile_of).last()
@@ -73,3 +74,6 @@ class PostFood(models.Model):
     calorie_amount = models.FloatField(default=0, null=True, blank=True)
     amount = models.FloatField(default=0)
     created_on = models.TimeField(auto_now=True)
+
+    def __str__(self):
+        return self.food.title

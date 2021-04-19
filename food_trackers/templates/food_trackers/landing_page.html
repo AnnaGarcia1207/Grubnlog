@@ -2,26 +2,29 @@
 
 {% block content %}
 
-    <h1>Inventory</h1>
-    <table style="width:100%">
-        <tr>
-            <th>Food Brand</th>
-            <th>Food Name</th>
-            <th>Diet Suited for</th>
-        </tr>
-        {% for item in food %}
-        <tr>
-            <td>{{ item.brand }}</td>
-            <td>{{ item.title }}</td>
-            <td>{{ item.diet }}</td>
-        </tr>
-        {% endfor %}
-    </table>
-<!--    <div class="foods">-->
-<!--        {% for item in food %}-->
-<!--        <div class="food">-->
-<!--            <h2>{{item.title}}</h2>-->
-<!--        </div>-->
-<!--        {% endfor %}-->
-<!--    </div>-->
+    <title>Landing Page</title>
+        <br><br>
+         <h1 class="headline text-center mt-auto mb-auto">Inventory</h1>
+        <div class="container table-responsive py-5">
+        <table class="table table-bordered table-hover">
+          <thead class="thread-dark">
+            <tr class="text-center">
+              <th scope="col">Food</th>
+              <th scope="col">Calorie</th>
+              <th scope="col">Quantity</th>
+            </tr>
+          </thead>
+          <tbody>
+
+
+            {% for item in food %}
+            <tr class="text-center">
+              <td><a href="{% url 'food_trackers:food_details' item.slug %}">{{ item.title }}</a></td>
+              <td> {{ item.calories }}</td>
+              <td> {{ item.quantity }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        </div>
 {% endblock %}
