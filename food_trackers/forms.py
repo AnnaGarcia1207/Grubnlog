@@ -50,5 +50,5 @@ class AddFoodForm(ModelForm):
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ('calorie_goal',)
+        fields = ('calorie_goal', 'diet')
         # maybe include diet?

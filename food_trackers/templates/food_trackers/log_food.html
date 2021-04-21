@@ -5,10 +5,14 @@
 <!--    <link rel="stylesheet" href="../../static/styles.css" />-->
 <!--    </head>-->
     <style>
-    .create_log{ background:linear-gradient(to top, #000428, #004e92);
+    .create_log{
+    background: #00416A;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to top, #E4E5E6, #00416A);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to top, #E4E5E6, #00416A); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
      height:100vh;}
 
-    .create_log_box{ background:linear-gradient(to bottom, #005aa7, #fffde4);
+    .create_log_box{
+    background: #E4E5E6;
      height:auto;
      width:80%;
      border: 1px solid white;
@@ -25,10 +29,10 @@
      select{width: 100%;}
 
     .log_food_title{
-        color:white;
-        text-align:center;
+        color:black;
+        text-align:left;
         font-family:'Courier New', Courier, monospace;
-        font-weight:600;
+        font-weight:500;
     }
 
     </style>
@@ -37,7 +41,7 @@
     <div class="create_log">
         <br>
         <div class="create_log_box">
-        <h2 class="log_food_title" >Log food for today</h2>
+        <h2 class="log_food_title" >Log your food for today</h2>
         <br>
         <table>
         <form class="site_log_form" action="{% url 'food_trackers:log_food' %}" method="post">

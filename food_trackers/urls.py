@@ -15,6 +15,7 @@ urlpatterns = [
     path('log_food/', views.log_food, name='log_food'),
     path('create/', views.create, name='create'),
     path('profile/', views.profile, name='profile'),
+    path('pie_chart/', views.pie_chart, name='pie_chart'),
     path('update_food/<str:pk>/', views.update_food, name='update_food'),
     path('delete_food/<str:pk>/', views.delete_food, name='delete_food'),
     path('<slug:slug>/', views.food_details, name='food_details'),

@@ -3,14 +3,16 @@
 {% block content %}
 
     <title>History Page</title>
-         <h1 class="headline text-center mt-auto mb-auto">All Logged Food</h1>
+           <br><br>
+         <h1 class="headline text-center mt-auto mb-auto">Logged Items</h1>
         <div class="container table-responsive py-5">
         <table class="table table-bordered table-hover">
           <thead class="thread-dark">
             <tr class="text-center">
+              <th scope="col">Date Added</th>
               <th scope="col">Food</th>
-              <th scope="col">Calorie</th>
-              <th scope="col">Quantity</th>
+              <th scope="col">Calories</th>
+                <th scope="col">Quantity</th>
             </tr>
           </thead>
           <tbody>
@@ -18,6 +20,7 @@
 
             {% for item in food %}
             <tr class="text-center">
+              <td> {{ item.created_on }}</td>
               <td><a href="{% url 'food_trackers:food_details' item.slug %}">{{ item.title }}</a></td>
               <td> {{ item.calories }}</td>
               <td> {{ item.quantity }}</td>

@@ -2,10 +2,18 @@
 
 {% block content %}
     <style>
-        .create_food{ background:linear-gradient(to top, #000428, #004e92);
+        .create_food{
+        background: #00416A;  /* fallback for old browsers */
+        background: -webkit-linear-gradient(to top, #E4E5E6, #00416A);  /* Chrome 10-25, Safari 5.1-6 */
+        background: linear-gradient(to top, #E4E5E6, #00416A); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
         height:100%;}
 
-        .create_food_box{ background:linear-gradient(to top, #000428, #004e92);
+        .create_food_box{
+        background: #00416A;  /* fallback for old browsers */
+        background: -webkit-linear-gradient(to top, #E4E5E6, #00416A);  /* Chrome 10-25, Safari 5.1-6 */
+        background: linear-gradient(to top, #E4E5E6, #00416A); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
          height:auto;
          width:80%;
          margin:auto;
@@ -14,15 +22,17 @@
 
         h2{
         padding: 10px;
-        text-align: center;
+        text-align: left;
         color: white;
-        font-weight:600;
-        font-size: 40px;
+        font-weight:500;
+        font-size: 50px;
         font-family:'Courier New', Courier, monospace;
         }
 
         .site_create_form{
-         background:linear-gradient(to bottom, #005aa7, #fffde4);
+         background: #00416A;  /* fallback for old browsers */
+        background: -webkit-linear-gradient(to bottom, #E4E5E6, #00416A);  /* Chrome 10-25, Safari 5.1-6 */
+        background: linear-gradient(to bottom, #E4E5E6, #00416A); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
          height:auto;
          width:70%;
          border: 2px solid white;
@@ -38,10 +48,11 @@
         font-size: 15px;
         font-family:'Courier New', Courier, monospace;}
 
-        p3{
+        p{
         font-family:'Courier New', Courier, monospace;
-        color:white;
+        color:black;
         font-weight:bold;
+        font-size: 20px;
         }
 
     </style>
@@ -49,26 +60,26 @@
     <div class="create_food">
         <div class="create_food_box">
         <br>
-        <h2>Create Food</h2>
+        <h2>Create a new entry</h2>
         <br>
 
         <form class="site_create_form" action="" method="POST">
             {% csrf_token %}
-            <p3>Food title:{{ form.title }}</p3> <br><br>
-            <p3>Food brand: {{ form.brand }}</p3> <br><br>
-            <p3>Type of Diet: {{ form.diet }}</p3>
-            <p3>Quantity: {{ form.quantity }}</p3> <br><br>
-            <p3>Calories: {{ form.calories }}</p3> <br><br>
-            <p3>Total Fats: {{ form.fats }} G</p3> <br><br>
-            <p3>Cholesterol: {{ form.cholesterol }} MG</p3> <br><br>
-            <p3>Sodium: {{ form.sodium }} MG</p3> <br><br>
-            <p3>Total Carbohydrates: {{ form.carbs }} G</p3> <br><br>
-            <p3>Protein: {{ form.proteins }} G</p3> <br><br>
-            <p3>Total Sugar: {{ form.sugar }}G</p3> <br><br>
-            <p3>Total Potassium: {{ form.potassium }} MG</p3> <br><br>
-            <p3>Food Ingredients: {{form.ingredients}}</p3> <br><br>
-            <p3>Food Allergens: {{form.allergens}}</p3> <br><br>
-            <p3>slug entry: {{form.slug}}</p3> <br><br>
+            <p>Food title:{{ form.title }}</p> <br><br>
+            <p>Food brand: {{ form.brand }}</p> <br><br>
+            <p>Type of Diet: {{ form.diet }}</p>
+            <p>Quantity: {{ form.quantity }}</p> <br><br>
+            <p>Calories: {{ form.calories }}</p> <br><br>
+            <p>Total Fats: {{ form.fats }} G</p> <br><br>
+            <p>Cholesterol: {{ form.cholesterol }} MG</p> <br><br>
+            <p>Sodium: {{ form.sodium }} MG</p> <br><br>
+            <p>Total Carbohydrates: {{ form.carbs }} G</p> <br><br>
+            <p>Protein: {{ form.proteins }} G</p> <br><br>
+            <p>Total Sugar: {{ form.sugar }}G</p> <br><br>
+            <p>Total Potassium: {{ form.potassium }} MG</p> <br><br>
+            <p>Food Ingredients: {{form.ingredients}}</p> <br><br>
+            <p>Food Allergens: {{form.allergens}}</p> <br><br>
+            <p>slug entry: {{form.slug}}</p> <br><br>
 
             <input type="submit" value="Create Food">
         </form>

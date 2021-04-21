@@ -118,7 +118,7 @@ def update_food(request, pk):
         form = AddFoodForm(request.POST, instance=food_item)
         if form.is_valid():
             form.save()
-            return redirect('food_trackers:log_food')
+            return redirect('food_trackers:profile')
     return render(request, 'food_trackers/create_food.html', {'form': form})
 
 
@@ -153,53 +153,54 @@ def profile(request):
 
 @login_required(login_url='food_trackers:login')  # This protects this view
 def home(request):
-    calories = Profile.objects.filter(profile_of=request.user).last()
-    calorie_goal = calories.calorie_goal
+    person = Profile.objects.filter(profile_of=request.user).last()  #
+    calorie_goal = person.calorie_goal  #
 
-    if date.today() > calories.date:
+    if date.today() > person.date:
         profile = Profile.objects.create(profile_of=request.user)
         profile.save()
-    calories = Profile.objects.filter(profile_of=request.user).last()
+    person = Profile.objects.filter(profile_of=request.user).last()  #
 
-    all_logs_today = PostFood.objects.filter(profile=calories)
+    all_logs_today = PostFood.objects.filter(profile=person)  #
 
-    calorie_goal_status = calorie_goal - calories.total_calorie
+    calorie_goal_status = calorie_goal - person.total_calorie
     over_calorie = 0
 
     if calorie_goal_status < 0:
         over_calorie = abs(calorie_goal_status)
 
     context = {
-        'total_calorie': calories.total_calorie,
+        'total_calorie': person.total_calorie,  #
         'calorie_goal': calorie_goal,
         'calorie_goal_status': calorie_goal_status,
         'over_calorie': over_calorie,
         'food_selected_today': all_logs_today
-
     }
 
     return render(request, 'food_trackers/home.html', context)
 
 
-def display_chart(request):
+def pie_chart(request):
     person = Profile.objects.filter(profile_of=request.user).last()
-    foods_selected = person.food_selected
 
+    if date.today() > person.date:
+        profile = Profile.objects.create(profile_of=request.user)
+        profile.save()
+    person = Profile.objects.filter(profile_of=request.user).last()
 
-def demo_piechart(request):
-    """
-    pieChart page
-    """
-    xdata = ["Apple", "Apricot", "Avocado", "Banana", "Boysenberries", "Blueberries", "Dates", "Grapefruit", "Kiwi",
-             "Lemon"]
-    ydata = [52, 48, 160, 94, 75, 71, 490, 82, 46, 17]
+    all_logs_today = PostFood.objects.filter(profile=person)
 
-    extra_serie = {"tooltip": {"y_start": "", "y_end": " cal"}}
-    chartdata = {'x': xdata, 'y1': ydata, 'extra1': extra_serie}
-    charttype = "pieChart"
+    entries = all_logs_today
 
-    data = {
-        'charttype': charttype,
-        'chartdata': chartdata,
-    }
-    return render(request, 'piechart.html', data)
+    # labels = ['fats', 'proteins', 'carbs']
+    # data = [0, 0, 0]
+    # for i in entries:
+    #     data[0] += i.fats
+    #     data[0] += i.proteins
+    #     data[0] += i.carbs
+
+    # context = {
+    #     'labels': labels,
+    #     'data': data,
+    # }
+    return render(request, 'pie_chart.html', {'data': all_logs_today} )

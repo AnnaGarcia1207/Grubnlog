@@ -12,7 +12,7 @@ DIET_CHOICES = (("Paleo", "Paleo"),
 
 
 class Food(models.Model):
-    # about the food
+    # about the foodx
     title = models.CharField(max_length=100, null=False)
     brand = models.CharField(max_length=100, blank=True)
     quantity = models.PositiveIntegerField(null=False, default=1)

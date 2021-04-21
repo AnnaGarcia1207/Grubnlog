@@ -6,50 +6,40 @@
 <!--    </head>-->
     <title>Home Page</title>
     <style>
-        .home1{background:linear-gradient(to top, #E5E5BE, #003973);
+        .home_page_body{
+        background: #00416A;  /* fallback for old browsers */
+        background: -webkit-linear-gradient(to bottom, #E4E5E6, #00416A);  /* Chrome 10-25, Safari 5.1-6 */
+        background: linear-gradient(to bottom, #E4E5E6, #00416A); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
          height:100vh;
         }
-        div table thead tr {
-            background:red;
+
+        }
+        .table {
+        background-color: white;
+        color: black;
+        font-family:'Courier New', Courier, monospace;
+        font-weight:500;
+        }
+        table.table-bordered > thead > tr > th {
+          border:1px solid #1e3c72;
+        }
+        table.table-bordered > tbody > tr > td {
+          border:1px solid #1e3c72;
+        }
+
+        .headline {
+         font-family: 'Courier New', Courier, monospace;
+         padding-top:20px;
+         color: black;
+         font-weight: 400;
         }
 
     </style>
-    <div class="container mt-2">
-  <div class="row">
-    <div class="col-lg-6 col-sm-12 item ">
-      <div class="card item-card card-block">
-        <h5 class="card-title mt-3 mb-3 text-center">Total Calories Consumed Today</h5>
-        <p class="card-text text-center">{{ total_calorie }}</p>
-    </div>
-    </div>
-    <div class="col-lg-6 col-sm-12 item">
-      <div class="card item-card card-block mt-sm-2 mt-lg-0">
-        <h5 class="card-title  mt-3 mb-3 text-center">Calorie Goal For Today</h5>
-        <p class="card-text text-center">{{ calorie_goal }}</p>
-  </div>
-    </div>
-  </div>
+<body class="home_page_body">
 
-</div>
-
-      <div class="card text-white text-center mt-4"  style="border-radius: 20px;">
-
-        <div class="card-body">
-
-          <p class="card-text text-center pt-3" style="font-size:22px">
-          {% if calorie_goal_status > 0 %}
-      You need  {{ calorie_goal_status }} calories more to reach your goal
-      {% elif calorie_goal == 0 %}
-      <a href="{% url 'food_trackers:profile' %}"> Enter your calorie goal for the day </a>
-      {% else %}
-      You surpassed your goal by {{ over_calorie }} calories
-      {% endif %} </p>
-
-        </div>
-
-      </div>
-
-<h1 class="headline text-center mt-auto mb-auto">All Food Consumed Today </h1>
+<br><br>
+<h1 class="headline text-center mt-auto mb-auto">Recent Entries</h1>
 <div class="container table-responsive py-5">
 <table class="table table-bordered table-hover">
   <thead class="thead-dark">
@@ -74,5 +64,5 @@
   </tbody>
 </table>
 </div>
-
+</body>
 {% endblock %}

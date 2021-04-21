@@ -79,6 +79,11 @@
 		margin-left: auto;
 		margin-right: auto;
 		}
+		.my_logo{
+		object-fit: contain;
+		width: 300px;
+		border-radius:20px;
+		}
 	</style>
 
 </head>
@@ -87,7 +92,8 @@
 
 		<div class="d-flex justify-content-center h-100">
 			<div class="user_card">
-				<img src="{% static 'sm_logo_homepage.png' %}" alt="log" class="center" >
+				<img src="{% static 'sm_logo_homepage.png' %}" alt="log" class="my_logo" >
+				<br>
 				<div class="d-flex justify-content-center">
 
 					<h3 id="form-title">LOGIN</h3>
