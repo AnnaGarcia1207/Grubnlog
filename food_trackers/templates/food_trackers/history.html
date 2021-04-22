@@ -1,10 +1,47 @@
 {% extends 'base_layout.html' %}
-
+{% load static %}
 {% block content %}
 
     <title>History Page</title>
+    <style>
+        .history_body{
+            background: #00416A;  /* fallback for old browsers */
+        background: -webkit-linear-gradient(to bottom, #E4E5E6, #00416A);  /* Chrome 10-25, Safari 5.1-6 */
+        background: linear-gradient(to bottom, #E4E5E6, #00416A); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */ !important;
+
+         height:100%;
+        }
+        .img_log{
+            text-align:center;
+        }
+        .headline {
+         font-family: 'Courier New', Courier, monospace;
+         padding-top:20px;
+         color: black;
+         font-weight: 400;
+        }
+
+        .table {
+        background-color: white;
+        color: black;
+        font-family:'Courier New', Courier, monospace;
+        font-weight:800;
+        }
+        table.table-bordered > thead > tr > th {
+          border:1px solid #1e3c72;
+        }
+        table.table-bordered > tbody > tr > td {
+          border:1px solid #1e3c72;
+        }
+    </style>
+    <body class="history_body">
+        <br>
+        <br>
+            <div class="img_log center">
+                <img src="{% static 'logo_4.png' %}" alt="log">
+            </div>
            <br><br>
-         <h1 class="headline text-center mt-auto mb-auto">Logged Items</h1>
+         <h1 class="headline text-center mt-auto mb-auto">Your Past Entries</h1>
         <div class="container table-responsive py-5">
         <table class="table table-bordered table-hover">
           <thead class="thread-dark">
@@ -29,5 +66,5 @@
           </tbody>
         </table>
         </div>
-
+</body>
 {% endblock %}

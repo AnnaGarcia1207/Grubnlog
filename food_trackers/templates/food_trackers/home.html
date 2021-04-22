@@ -1,5 +1,6 @@
 {% extends 'base_layout.html' %}
 
+{% load static %}
 {% block content %}
 <!--    <head>-->
 <!--    <link rel="stylesheet" href="../../static/styles.css" />-->
@@ -14,7 +15,7 @@
          height:100vh;
         }
 
-        }
+
         .table {
         background-color: white;
         color: black;
@@ -34,35 +35,42 @@
          color: black;
          font-weight: 400;
         }
+        .img_log{
+            text-align:center;
+        }
 
     </style>
 <body class="home_page_body">
+    <br>
+    <br>
+        <div class="img_log center">
+            <img src="{% static 'logo_4.png' %}" alt="log">
+        </div>
 
-<br><br>
-<h1 class="headline text-center mt-auto mb-auto">Recent Entries</h1>
-<div class="container table-responsive py-5">
-<table class="table table-bordered table-hover">
-  <thead class="thead-dark">
-    <tr class="text-center">
-      <th scope="col">Time</th>
-      <th scope="col">Food</th>
-      <th scope="col">Calorie</th>
-      <th scope="col">Count</th>
-    </tr>
-  </thead>
-  <tbody>
+    <br>
+    <h1 class="headline text-center mt-auto mb-auto">Recent Entries</h1>
+    <div class="container table-responsive py-5">
+    <table class="table table-bordered table-hover">
+      <thead class="thead-dark">
+        <tr class="text-center">
+          <th scope="col">Time</th>
+          <th scope="col">Food</th>
+          <th scope="col">Calorie</th>
+          <th scope="col">Quantity</th>
+        </tr>
+      </thead>
 
-
-    {% for food in food_selected_today %}
-    <tr class="text-center">
-      <td> {{ food.created_on }}</td>
-      <td> {{ food.food.title }}</td>
-      <td> {{ food.calorie_amount }}</td>
-      <td> {{ food.amount }}</td>
-    </tr>
-    {% endfor %}
-  </tbody>
-</table>
-</div>
+      <tbody>
+        {% for food in food_selected_today %}
+        <tr class="text-center">
+          <td> {{ food.created_on }}</td>
+          <td> {{ food.food.title }}</td>
+          <td> {{ food.calorie_amount }}</td>
+          <td> {{ food.amount }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+  </table>
+  </div>
 </body>
 {% endblock %}

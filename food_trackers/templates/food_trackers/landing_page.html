@@ -1,17 +1,40 @@
 {% extends 'base_layout.html' %}
-
+{% load static %}
 {% block content %}
 
     <title>Landing Page</title>
-        <br><br>
+    <style>
+        .landing_page_body{
+            height: 100%;
+			background: #D3CCE3;  /* fallback for old browsers */
+            background: -webkit-linear-gradient(to top, #E9E4F0, #D3CCE3);  /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to top, #E9E4F0, #D3CCE3); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */ !important;
+        }
+        .img_log{
+            text-align:center;
+        }
+        .headline{
+        font-size: 50px;
+        font-family:'Courier New', Courier, monospace;
+        font-weight: 800px;
+        }
+
+    </style>
+
+    <body class="landing_page_body">
+        <br>
+        <div class="img_log center">
+            <img src="{% static 'logo_4.png' %}" alt="log">
+        </div>
+        <br>
          <h1 class="headline text-center mt-auto mb-auto">Inventory</h1>
         <div class="container table-responsive py-5">
         <table class="table table-bordered table-hover">
           <thead class="thread-dark">
             <tr class="text-center">
               <th scope="col">Food</th>
-              <th scope="col">Calorie</th>
-              <th scope="col">Quantity</th>
+              <th scope="col">Type of Diet</th>
+              <th scope="col">Contributor</th>
             </tr>
           </thead>
           <tbody>
@@ -20,11 +43,12 @@
             {% for item in food %}
             <tr class="text-center">
               <td><a href="{% url 'food_trackers:food_details' item.slug %}">{{ item.title }}</a></td>
-              <td> {{ item.calories }}</td>
-              <td> {{ item.quantity }}</td>
+              <td> {{ item.diet }}</td>
+              <td> {{ item.profile_of }}</td>
             </tr>
             {% endfor %}
           </tbody>
         </table>
         </div>
+    </body>
 {% endblock %}

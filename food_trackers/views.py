@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, logout
+from django.contrib import messages
 from .forms import CreateUserForm, LogFoodForm, AddFoodForm, ProfileForm
 from .models import Food, Profile, PostFood
 from .filters import FoodFilter
@@ -25,7 +26,7 @@ def food_details(request, slug):
 
 def register_view(request):
     if request.user.is_authenticated:
-        return redirect('food_trackers:home')
+        return redirect('food_trackers:profile')
     else:
         if request.method == 'POST':
             form = CreateUserForm(request.POST)  # Used to be UserCreationForm
@@ -33,7 +34,7 @@ def register_view(request):
                 user = form.save()
                 # log the user in
                 login(request, user)
-                return redirect('food_trackers:home')
+                return redirect('food_trackers:profile')
         else:
             form = CreateUserForm()
         return render(request, 'food_trackers/register.html', {'form': form})
@@ -41,7 +42,7 @@ def register_view(request):
 
 def login_view(request):
     if request.user.is_authenticated:
-        return redirect('food_trackers:home')
+        return redirect('food_trackers:profile')
     else:
         if request.method == 'POST':
             form = AuthenticationForm(data=request.POST)
@@ -52,7 +53,9 @@ def login_view(request):
                 if 'next' in request.POST:
                     return redirect(request.POST.get('next'))
                 else:
-                    return redirect('food_trackers:home')
+                    return redirect('food_trackers:profile')
+            else:
+                messages.info(request, 'Username or password is incorrect')
         else:
             form = AuthenticationForm()
         return render(request, 'food_trackers/login.html', {'form': form})
@@ -181,26 +184,19 @@ def home(request):
 
 
 def pie_chart(request):
-    person = Profile.objects.filter(profile_of=request.user).last()
+    person = Profile.objects.filter(profile_of=request.user).last()  #
 
     if date.today() > person.date:
         profile = Profile.objects.create(profile_of=request.user)
         profile.save()
-    person = Profile.objects.filter(profile_of=request.user).last()
+    person = Profile.objects.filter(profile_of=request.user).last()  #
 
-    all_logs_today = PostFood.objects.filter(profile=person)
+    all_logs_today = PostFood.objects.filter(profile=person)  #
 
-    entries = all_logs_today
+    bacon = person.inventory.all()
 
-    # labels = ['fats', 'proteins', 'carbs']
-    # data = [0, 0, 0]
-    # for i in entries:
-    #     data[0] += i.fats
-    #     data[0] += i.proteins
-    #     data[0] += i.carbs
+    context = {
+        'food_selected_today': all_logs_today
+    }
 
-    # context = {
-    #     'labels': labels,
-    #     'data': data,
-    # }
-    return render(request, 'pie_chart.html', {'data': all_logs_today} )
+    return render(request, 'food_trackers/pie_chart.html', context)
