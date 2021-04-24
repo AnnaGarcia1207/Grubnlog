@@ -1,21 +1,37 @@
 {% extends 'base_layout.html' %}
-
+<!--{% load static %}-->
 {% block content %}
-  <div id="container" style="width: 75%;">
+
+<div id="container" style="width: 30%;">
     <canvas id="pie-chart"></canvas>
   </div>
-  <h>hello!</h>
-    <p id="demo"></p>
-     {% for x in food_selected_today %}
-      <script>
-        var i;
-        i = x.food.proteins
 
-      </script>
-    <p></p>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+  <script>
 
+    var config = {
+      type: 'pie',
+      data: {
+        datasets: [{
+          data: {{ data|safe }},
+          backgroundColor: [
+            '#FFFF00', '#3D85C6', '#9900FF'
+          ],
+          label: 'Nutrition'
+        }],
+        labels: {{ labels|safe }}
+      },
+      options: {
+        responsive: true
+      }
+    };
 
-  </div>
+    window.onload = function() {
+      var ctx = document.getElementById('pie-chart').getContext('2d');
+      window.myPie = new Chart(ctx, config);
+    };
+
+  </script>
 
 
 {% endblock %}

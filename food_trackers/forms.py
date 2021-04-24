@@ -16,11 +16,11 @@ class CreateUserForm(UserCreationForm):
 class LogFoodForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ('food_selected', 'quantity',)
+        fields = ()
 
     def __init__(self, user, *args, **kwargs):
         super(LogFoodForm, self).__init__(*args, **kwargs)
-        self.fields['food_selected'].queryset = Food.objects.filter(profile_of=user)
+        # self.fields['all_food_selected_today'].queryset = Food.objects.filter(profile_of=user)
 
 
 class AddFoodForm(ModelForm):
@@ -29,26 +29,12 @@ class AddFoodForm(ModelForm):
         fields = ['title', 'slug', 'brand', 'quantity', 'calories', 'proteins', 'fats', 'carbs',
                   'cholesterol', 'sodium', 'potassium', 'sugar', 'ingredients', 'allergens',
                   'diet']
-        # widgets = {
-        #     'title': forms.TextInput(attrs={'class': 'input'}),
-        #     'brand': forms.TextInput(attrs={'class': 'input'}),
-        #     'quantity': forms.TextInput(attrs={'class': 'input'}),
-        #     'calories': forms.TextInput(attrs={'class': 'input'}),
-        #     'proteins': forms.TextInput(attrs={'class': 'input'}),
-        #     'fats': forms.TextInput(attrs={'class': 'input'}),
-        #     'carbs': forms.TextInput(attrs={'class': 'input'}),
-        #     'cholesterol': forms.TextInput(attrs={'class': 'input'}),
-        #     'sodium': forms.TextInput(attrs={'class': 'input'}),
-        #     'potassium': forms.TextInput(attrs={'class': 'input'}),
-        #     'sugar': forms.TextInput(attrs={'class': 'input'}),
-        #     'ingredients': forms.Textarea(attrs={'class': 'input'}),
-        #     'allergens': forms.Textarea(attrs={'class': 'input'}),
-        #     'diet': forms.Select(attrs={'class': 'input'}),
-        # }
+
 
 
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
+        # fields = ('calorie_goal',)
         fields = ('calorie_goal', 'diet')
         # maybe include diet?

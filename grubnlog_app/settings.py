@@ -38,8 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'food_trackers', # new
+    'food_trackers.apps.FoodTrackersConfig', # new
     'django_filters', # new
+
 ]
 
 MIDDLEWARE = [

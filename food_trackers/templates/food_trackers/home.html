@@ -39,6 +39,7 @@
             text-align:center;
         }
 
+
     </style>
 <body class="home_page_body">
     <br>
@@ -48,25 +49,74 @@
         </div>
 
     <br>
+
+    <div class="my-chart" align="center">
+        <div id="container" style="width: 30%;">
+    <canvas id="pie-chart"></canvas>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+  <script>
+
+    var config = {
+      type: 'pie',
+      data: {
+        datasets: [{
+          data: {{ data|safe }},
+          backgroundColor: [
+            '#B4A7D6','#6F1862' ,'#FFE599'
+          ],
+          label: 'Nutrition'
+        }],
+        labels: {{ labels|safe }}
+      },
+      options: {
+        responsive: true,
+        legend: {
+            position: 'bottom',
+            color: '#FFE599',
+          },
+          title: {
+            display: true,
+            text: 'Your Macronutrients Breakdown',
+
+          }
+      }
+    };
+
+    window.onload = function() {
+      var ctx = document.getElementById('pie-chart').getContext('2d');
+      window.myPie = new Chart(ctx, config);
+    };
+
+  </script>
+    </div>
+
+
+
+
+    <br>
     <h1 class="headline text-center mt-auto mb-auto">Recent Entries</h1>
     <div class="container table-responsive py-5">
     <table class="table table-bordered table-hover">
       <thead class="thead-dark">
         <tr class="text-center">
-          <th scope="col">Time</th>
-          <th scope="col">Food</th>
+<!--          <th scope="col">Time</th>-->
+          <th scope="col" width="600">Food</th>
           <th scope="col">Calorie</th>
           <th scope="col">Quantity</th>
+          <th scope="col">Diet</th>
         </tr>
       </thead>
 
       <tbody>
         {% for food in food_selected_today %}
         <tr class="text-center">
-          <td> {{ food.created_on }}</td>
-          <td> {{ food.food.title }}</td>
-          <td> {{ food.calorie_amount }}</td>
-          <td> {{ food.amount }}</td>
+<!--          <td> {{ time }}</td>-->
+          <td>{{ food.title }}</td>
+          <td> {{ food.calories }}</td>
+          <td> {{ food.quantity }}</td>
+          <td> {{ food.diet }}</td>
         </tr>
         {% endfor %}
     </tbody>

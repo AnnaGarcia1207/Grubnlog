@@ -19,6 +19,7 @@ urlpatterns = [
     path('update_food/<str:pk>/', views.update_food, name='update_food'),
     path('delete_food/<str:pk>/', views.delete_food, name='delete_food'),
     path('<slug:slug>/', views.food_details, name='food_details'),
+    path('log_food_v2/<int:pk>/', views.log_food_v2, name="log_food_v2"),
     # history
 
 ]

@@ -9,7 +9,7 @@
         background: -webkit-linear-gradient(to bottom, #E4E5E6, #00416A);  /* Chrome 10-25, Safari 5.1-6 */
         background: linear-gradient(to bottom, #E4E5E6, #00416A); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */ !important;
 
-         height:100%;
+         height:100vh;
         }
         .img_log{
             text-align:center;
@@ -57,7 +57,7 @@
 
             {% for item in food %}
             <tr class="text-center">
-              <td> {{ item.created_on }}</td>
+              <td> {{ item.log.date }}</td>
               <td><a href="{% url 'food_trackers:food_details' item.slug %}">{{ item.title }}</a></td>
               <td> {{ item.calories }}</td>
               <td> {{ item.quantity }}</td>

@@ -35,6 +35,20 @@
         font-weight:500;
     }
 
+    .table {
+    background-color: white;
+    color: black;
+    font-family:'Courier New', Courier, monospace;
+    font-weight:800;
+    }
+    table.table-bordered > thead > tr > th {
+      border:1px solid #1e3c72;
+    }
+    table.table-bordered > tbody > tr > td {
+      border:1px solid #1e3c72;
+    }
+
+
     </style>
 
     <title>Log Food</title>
@@ -43,14 +57,35 @@
         <div class="create_log_box">
         <h2 class="log_food_title" >Log your food for today</h2>
         <br>
-        <table>
-        <form class="site_log_form" action="{% url 'food_trackers:log_food' %}" method="post">
-            {% csrf_token %}
-            {{ form.as_table }}
 
+            <table class="table table-bordered table-hover">
+                  <thead class="thead-dark">
+                    <tr class="text-center">
+            <!--          <th scope="col">Time</th>-->
+                      <th scope="col">Food</th>
+                      <th scope="col">Calorie</th>
+                      <th scope="col">Quantity</th>
+                      <th scope="col"></th>
+                      <th scope="col"></th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    {% for food in food_items %}
+                    <tr class="text-center">
+            <!--          <td> {{ food.created_on }}</td>-->
+                      <td> {{ food.title }}</td>
+                      <td> {{ food.calories }}</td>
+                      <td> {{ food.quantity }}</td>
+                      <td><a href="{% url 'food_trackers:log_food_v2' food.id %}" method="POST">
+                            Log Food</a></td>
+                      <td><a href="{% url 'food_trackers:home' %}">
+                            View Journal</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
             </table>
-            <input type="submit" value="Log today">
-        </form>
+
         </div>
     </div>
 

@@ -9,8 +9,7 @@
     background: #00416A;  /* fallback for old browsers */
     background: -webkit-linear-gradient(to top, #E4E5E6, #00416A);  /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(to top, #E4E5E6, #00416A); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
-    height:100%;
+    height:100vh;
 }
 
 .btn {
@@ -108,18 +107,17 @@ p{
                 <h1 class="text-center profile-text mt-2">Hello {{ request.user }}! </h1>
 
             </div>
-
             <form method="POST" action="" class="login-form pt-4">
-              {% csrf_token %}
-
+                {% csrf_token %}
                 <p>Calorie Goal For Today {{form.calorie_goal}}</p><br>
                 <p>Your diet: {{form.diet}}</p>
-                <br>
+
                 <div class="button_space">
-                    <br>
+
                 <input class="btn login_btn profile-submit ml-3" type="submit" value="select">
                 </div>
             </form>
+
         </div>
 
         <div class="col-lg-7">
@@ -154,7 +152,7 @@ p{
       <table class="table text-center">
             <thead class="thead-dark">
                 <tr>
-                    <th scope="col">Food Name</th>
+                    <th scope="col" width="900">Food Name</th>
                     <th scope="col">Calories</th>
                     <th scope="col">Quantity</th>
                     <th scope="col">Update</th>

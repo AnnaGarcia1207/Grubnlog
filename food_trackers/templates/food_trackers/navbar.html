@@ -26,24 +26,29 @@
 
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
-      <li class="nav-item active">
-        <a class="nav-link" href="{% url 'food_trackers:profile' %}">Profile<span class="sr-only">(current)</span></a>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'food_trackers:profile' %}">Profile <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="{% url 'food_trackers:log_food' %}">Log Food</a>
+        <a class="nav-link" href="{% url 'food_trackers:log_food' %}"> LogFood </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="{% url 'food_trackers:create' %}">Create Food</a>
+        <a class="nav-link" href="{% url 'food_trackers:create' %}"> CreateFood </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="{% url 'food_trackers:history' %}">History</a>
+        <a class="nav-link" href="{% url 'food_trackers:history' %}"> History</a>
       </li>
 
     </ul>
   </div>
-  <span class="hello-msg">Hello, {{request.user}} </span>
-  <span class="hello-msg"><a href="{% url 'food_trackers:logout' %}">Logout</a></span>
+    {% if user.is_authenticated %}
+    {% csrf_token %}
+    <span class="hello-msg">Hello, {{request.user}} </span>
 
+    <span class="hello-msg"><a href="{% url 'food_trackers:logout' %}">Logout</a></span>
+    {% else %}
+    <span class="hello-msg"><a href="{% url 'food_trackers:login' %}">Login</a></span>
+    {% endif %}
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
