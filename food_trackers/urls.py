@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+from django.contrib.auth import views as auth_views
 
 app_name = 'food_trackers'
 urlpatterns = [
@@ -20,6 +21,11 @@ urlpatterns = [
     path('delete_food/<str:pk>/', views.delete_food, name='delete_food'),
     path('<slug:slug>/', views.food_details, name='food_details'),
     path('log_food_v2/<int:pk>/', views.log_food_v2, name="log_food_v2"),
-    # history
+    # email password reset
+
+    # path('reset_password/', auth_views.PasswordResetView.as_view(), name="reset_password"),  # Submit email
+    # path('reset_password_sent/', auth_views.PasswordResetDoneView.as_view(), name="password_reset_done"),  # Email sent success Message
+    # path('reset/<uidb64>/<token>', auth_views.PasswordResetConfirmView.as_view(), name="password_reset_confirm"),  # Link to password reset form
+    # path('reset_password_complete/', auth_views.PasswordResetCompleteView.as_view(), name="password_reset_complete"),  # Password successfully change message
 
 ]

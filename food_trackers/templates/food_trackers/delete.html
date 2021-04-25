@@ -2,11 +2,37 @@
 
 {% block content %}
 
-<p class="text-center headline" style="font-size:32px">Are you sure you want to delete {{ food.title }}</p>
-<form method="POST" action="{% url 'food_trackers:delete_food' food.id %}" class="text-center">
-	{% csrf_token %}
-	<a href="{% url 'food_trackers:home' %}">Cancel</a>
-	<input type="submit" name="Confirm">
-</form>
+<style>
+	.body-delete{
+		background: #00416A;  /* fallback for old browsers */
+		background: -webkit-linear-gradient(to top, #E4E5E6, #00416A);  /* Chrome 10-25, Safari 5.1-6 */
+		background: linear-gradient(to top, #E4E5E6, #00416A); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+		height:100vh;
+	}
+
+	p {
+	font-family: 'Courier New', Courier, monospace;
+	padding-top:20px;
+	color: black;
+	font-weight: 800;
+	font-size: 200%;
+	}
+</style>
+<body class="body-delete">
+<br>
+<div class="row" align="center">
+		<div class="card card-body">
+			<p>Are you sure you want to delete "{{food.title}}"?</p>
+
+			<form action="{% url 'food_trackers:delete_food' food.id  %}" method="POST">
+
+				{% csrf_token %}
+				<a class="btn btn-warning" href="{% url 'food_trackers:profile' %}">Cancel</a>
+
+				<input class="btn btn-danger" type="submit" name="Confirm">
+			</form>
+		</div>
+</body>
+</div>
 
 {% endblock content %}
