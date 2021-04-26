@@ -1,0 +1,1 @@
+web: gunicorn grubnlog_app.wsgi --log-file -

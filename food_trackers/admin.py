@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Food, Profile, Diet, Log
+from food_trackers.models import Food, Profile, Diet, Log
 
 
 # Register your models here.
